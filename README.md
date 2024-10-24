@@ -18,7 +18,7 @@ The goal of this project is to implement:
 - **[Features](##Features)**
 - **[Installation Step](#Installation-Step)**
 - **[Dashboard](#Dashboard)**
-- **[Project Structure](#Project-Structure)**
+- **[Project Structures](#Project-Structures)**
 - **[Library](#Library)**
 
 ## Features
