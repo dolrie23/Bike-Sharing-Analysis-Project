@@ -53,7 +53,7 @@ pip install -r requirements.txt
 Type on your cmd or terminal:
 ```shell
 cd dashboard
-streamlit run dashboard.py
+streamlit run Dashboard.py
 ```
 
 ### Deployed Dashboard
