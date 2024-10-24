@@ -167,7 +167,23 @@ if uploaded_data is not None:
         ''')
 
     elif choice == 'When we need promotion?':
-        st.header("Korelasi setiap atribut data terhadap Jumlah User")
+        st.header("Casual vs Registered User based on Hour Data")
+        Hourly_data = df.groupby(by=['Hour']).agg({
+            'Casual': 'sum',
+            'Registered': 'sum',
+        })
+        fig, ax = plt.subplots(figsize=(12, 6))
+
+        sns.lineplot(x='Hour', y='Casual', data=Hourly_data, label='Casual', color='#88B04B', marker='o')
+        sns.lineplot(x='Hour', y='Registered', data=Hourly_data, label='Registered', color='#FFA07A', marker='o')
+        ax.set_title('Casual vs Registered User', size=15)
+        ax.set_xlabel('Hour')
+        ax.set_xticks(range(0, 24))
+        ax.set_ylabel('Number of Users')
+
+        st.pyplot(fig)
+
+        st.header("Casual vs Registered User 2011-2012 (Overall)")
 
         casual = df.Casual.sum()
         registered = df.Registered.sum()
@@ -186,8 +202,16 @@ if uploaded_data is not None:
         st.pyplot(fig)
         st.subheader('Hasil Analisis')
         st.markdown('''
-        Berdasarkan distribusi pengguna diatas, dapat diketahui perbedaan yang cukup jauh antara user casual dengan registered. 
-        Dimana tercatat total user tipe casual di tahun 2011 dan 2012 adalah 620.017 dan user tipe registered sebesar 2.672.662 pengguna. 
+        - Berdasarkan plot karakteristik casual vs registered user, diketahui bahwa casual user secara umum tidak sebanyak 
+        registered dan karakter dari grafik user menunjukkan kenaikan yang cenderung santai. Terlihat bahwa user mulai 
+        ramai di jam sibuk seperti jam 06.00 meningkat hingga mencapai puncak di jam 14.00 sebanyak 55089 user dan 
+        terdapat penurunan sebelum naik kembali di jam sibuk (17.00). Setelah jam sibuk user casual tidak lagi terlihat aktif. 
+        Sedangkan jika meninjau registered user secara umum karakternya mirip dengan plot sebelumnya di plot perbandingan 
+        user registered di weekday dan weekend. Jika perusahaan ingin meningkatkan tingkat pengguna, promosi dapat 
+        dilakukan di jam tidak sibuk mulai 10.00 hingga jam 15.00.
+        - Berdasarkan distribusi pengguna diatas, dapat diketahui perbedaan yang cukup jauh antara user casual dengan 
+        registered. Dimana tercatat total user tipe casual di tahun 2011 dan 2012 adalah 620.017 dan user tipe registered 
+        sebesar 2.672.662 pengguna. 
         ''')
 else:
     st.write("Please upload a CSV file to start analyzing the data.")
